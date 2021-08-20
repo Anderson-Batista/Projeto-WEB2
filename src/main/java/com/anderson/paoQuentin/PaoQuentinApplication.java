@@ -8,6 +8,9 @@ public class PaoQuentinApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PaoQuentinApplication.class, args);
+		
+	
 	}
 
+	
 }
