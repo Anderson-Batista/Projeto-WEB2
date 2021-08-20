@@ -1,25 +1,34 @@
 package com.anderson.paoQuentin.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Fornada {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Fornada implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	private String nomePao;
 	private LocalDateTime tempoPreparo;
 	
-	private Pao pao;
-
 	public Fornada() {
-		super();
+		super();	
 	}
 
-	public Fornada(Integer id, String nomePao, LocalDateTime tempoPreparo, Pao pao) {
+	public Fornada(Integer id, String nomePao, LocalDateTime tempoPreparo) {
 		super();
 		this.id = id;
 		this.nomePao = nomePao;
 		this.tempoPreparo = tempoPreparo;
-		this.pao = pao;
 	}
 
 	public Integer getId() {
@@ -46,14 +55,6 @@ public class Fornada {
 		this.tempoPreparo = tempoPreparo;
 	}
 
-	public Pao getPao() {
-		return pao;
-	}
-
-	public void setPao(Pao pao) {
-		this.pao = pao;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -77,5 +78,5 @@ public class Fornada {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}	
+	}
 }
