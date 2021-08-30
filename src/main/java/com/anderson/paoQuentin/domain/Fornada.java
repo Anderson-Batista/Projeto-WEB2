@@ -20,6 +20,7 @@ public class Fornada implements Serializable {
 	private Integer id;
 	private String nomePao;
 	private String descricao;
+	private String status;
 
 	@OneToMany(mappedBy = "fornada")
 	private List<Pao> paes = new ArrayList<>();
@@ -28,11 +29,12 @@ public class Fornada implements Serializable {
 		super();
 	}
 
-	public Fornada(Integer id, String nomePao, String descricao) {
+	public Fornada(Integer id, String nomePao, String descricao, String status) {
 		super();
 		this.id = id;
 		this.nomePao = nomePao;
 		this.descricao = descricao;
+		this.status = status;
 	}
 
 	public Integer getId() {
@@ -69,6 +71,14 @@ public class Fornada implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override
