@@ -39,4 +39,9 @@ public class FornadaService {
 		obj.setStatus(objDto.getStatus());
 		return repository.save(obj);
 	}
+
+	public void delete(Integer id) {
+		findById(id);
+		repository.deleteById(id);
+	}
 }
