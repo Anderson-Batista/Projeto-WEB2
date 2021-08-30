@@ -1,5 +1,6 @@
 package com.anderson.paoQuentin.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,9 @@ public class FornadaService {
 		Optional<Fornada> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! id: " + id + "Tipo: " + Fornada.class.getName()));
+	}
+	
+	public List<Fornada> findAll(){
+		return repository.findAll();
 	}
 }
