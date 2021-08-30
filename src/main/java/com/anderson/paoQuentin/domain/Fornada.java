@@ -1,34 +1,38 @@
 package com.anderson.paoQuentin.domain;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Fornada implements Serializable{
-	
+public class Fornada implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
 	private String nomePao;
-	private LocalDateTime tempoPreparo;
-	
+	private String descricao;
+
+	@OneToMany(mappedBy = "fornada")
+	private List<Pao> paes = new ArrayList<>();
+
 	public Fornada() {
-		super();	
+		super();
 	}
 
-	public Fornada(Integer id, String nomePao, LocalDateTime tempoPreparo) {
+	public Fornada(Integer id, String nomePao, String descricao) {
 		super();
 		this.id = id;
 		this.nomePao = nomePao;
-		this.tempoPreparo = tempoPreparo;
+		this.descricao = descricao;
 	}
 
 	public Integer getId() {
@@ -47,12 +51,24 @@ public class Fornada implements Serializable{
 		this.nomePao = nomePao;
 	}
 
-	public LocalDateTime getTempoPreparo() {
-		return tempoPreparo;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setTempoPreparo(LocalDateTime tempoPreparo) {
-		this.tempoPreparo = tempoPreparo;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public List<Pao> getPaes() {
+		return paes;
+	}
+
+	public void setPaes(List<Pao> paes) {
+		this.paes = paes;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
@@ -79,4 +95,5 @@ public class Fornada implements Serializable{
 			return false;
 		return true;
 	}
+
 }

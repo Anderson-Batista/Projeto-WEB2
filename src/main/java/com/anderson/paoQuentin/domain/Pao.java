@@ -2,13 +2,10 @@ package com.anderson.paoQuentin.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Pao implements Serializable {
@@ -18,23 +15,20 @@ public class Pao implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
 	private String nome;
-	private String descricao;
+	private String tempoPreparo;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fornada_id")
 	private Fornada fornada;
 
 	public Pao() {
 		super();
 	}
 
-	public Pao(Integer id, String nome, String descricao, Fornada fornada) {
+	public Pao(Integer id, String nome, String tempoPreparo, Fornada fornada) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.descricao = descricao;
+		this.tempoPreparo = tempoPreparo;
 		this.fornada = fornada;
 	}
 
@@ -54,12 +48,12 @@ public class Pao implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getTempoPreparo() {
+		return tempoPreparo;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setTempoPreparo(String tempoPreparo) {
+		this.tempoPreparo = tempoPreparo;
 	}
 
 	public Fornada getFornada() {
@@ -68,6 +62,10 @@ public class Pao implements Serializable {
 
 	public void setFornada(Fornada fornada) {
 		this.fornada = fornada;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
