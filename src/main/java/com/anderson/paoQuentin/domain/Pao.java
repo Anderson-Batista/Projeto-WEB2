@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Pao implements Serializable {
 
@@ -20,6 +22,7 @@ public class Pao implements Serializable {
 	private String nome;
 	private String tempoPreparo;
 
+	@JsonIgnore
 	@ManyToOne()
 	@JoinColumn()
 	private Fornada fornada;
