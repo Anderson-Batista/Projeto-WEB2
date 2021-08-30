@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.anderson.paoQuentin.domain.Fornada;
+import com.anderson.paoQuentin.dtos.FornadaDto;
 import com.anderson.paoQuentin.repositories.FornadaRepository;
 import com.anderson.paoQuentin.service.exceptions.ObjectNotFoundException;
 
@@ -28,6 +29,14 @@ public class FornadaService {
 	
 	public Fornada create(Fornada obj) {
 		obj.setId(null);
+		return repository.save(obj);
+	}
+
+	public Fornada update(Integer id, FornadaDto objDto) {
+		Fornada obj = findById(id);
+		obj.setNomePao(objDto.getNomePao());
+		obj.setDescricao(objDto.getDescricao());
+		obj.setStatus(objDto.getStatus());
 		return repository.save(obj);
 	}
 }
