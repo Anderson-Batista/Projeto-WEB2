@@ -25,4 +25,9 @@ public class FornadaService {
 	public List<Fornada> findAll(){
 		return repository.findAll();
 	}
+	
+	public Fornada create(Fornada obj) {
+		obj.setId(null);
+		return repository.save(obj);
+	}
 }
