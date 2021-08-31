@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.anderson.paoQuentin.domain.Fornada;
@@ -22,11 +23,11 @@ public class FornadaService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! id: " + id + "Tipo: " + Fornada.class.getName()));
 	}
-	
-	public List<Fornada> findAll(){
+
+	public List<Fornada> findAll() {
 		return repository.findAll();
 	}
-	
+
 	public Fornada create(Fornada obj) {
 		obj.setId(null);
 		return repository.save(obj);
@@ -42,6 +43,11 @@ public class FornadaService {
 
 	public void delete(Integer id) {
 		findById(id);
-		repository.deleteById(id);
+		try {
+			repository.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new com.anderson.paoQuentin.service.exceptions.DataIntegrityViolationException(
+					"Fornada não pode ser deletada");
+		}
 	}
 }
