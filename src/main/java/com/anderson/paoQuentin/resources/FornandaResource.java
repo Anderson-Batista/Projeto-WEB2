@@ -4,8 +4,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +23,7 @@ import com.anderson.paoQuentin.domain.Fornada;
 import com.anderson.paoQuentin.dtos.FornadaDto;
 import com.anderson.paoQuentin.service.FornadaService;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/fornadas")
 public class FornandaResource {
@@ -41,14 +45,14 @@ public class FornandaResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<Fornada> create(@RequestBody Fornada obj) {
+	public ResponseEntity<Fornada> create(@Valid @RequestBody Fornada obj) {
 		obj = service.create(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<FornadaDto> update(@PathVariable Integer id, @RequestBody FornadaDto objDto){
+	public ResponseEntity<FornadaDto> update(@Valid @PathVariable Integer id, @RequestBody FornadaDto objDto){
 		Fornada newObj = service.update(id, objDto);
 		return ResponseEntity.ok().body(new FornadaDto(newObj));
 	}

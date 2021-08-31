@@ -4,8 +4,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -22,6 +25,7 @@ import com.anderson.paoQuentin.domain.Pao;
 import com.anderson.paoQuentin.dtos.PaoDto;
 import com.anderson.paoQuentin.service.PaoService;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/paes")
 public class PaoResource {
@@ -43,20 +47,20 @@ public class PaoResource {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Pao> update(@PathVariable Integer id, @RequestBody Pao obj) {
+	public ResponseEntity<Pao> update(@PathVariable Integer id,@Valid @RequestBody Pao obj) {
 		Pao newObj = service.update(id, obj);
 		return ResponseEntity.ok().body(newObj);
 	}
 
 	@PatchMapping(value = "/{id}")
-	public ResponseEntity<Pao> updatePatch(@PathVariable Integer id, @RequestBody Pao obj) {
+	public ResponseEntity<Pao> updatePatch(@PathVariable Integer id,@Valid  @RequestBody Pao obj) {
 		Pao newObj = service.update(id, obj);
 		return ResponseEntity.ok().body(newObj);
 	}
 
 	@PostMapping
 	public ResponseEntity<Pao> create(@RequestParam(value = "fornada", defaultValue = "0") Integer id_for,
-			@RequestBody Pao obj) {
+			@Valid @RequestBody Pao obj) {
 		Pao newObj = service.create(id_for, obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/paes/{id}")
 				.buildAndExpand(newObj.getId()).toUri();

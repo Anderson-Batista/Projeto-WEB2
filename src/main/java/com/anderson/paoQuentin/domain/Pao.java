@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,7 +22,13 @@ public class Pao implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@NotEmpty(message = "Campo nome requerido")
+	@Length(min = 3, max = 100, message = "O campo nome deve conter entre 3 e 100 caracteres")
 	private String nome;
+	
+	@NotEmpty(message = "Campo tempoPreparo requerido")
+	@Length(min = 3, max = 100, message = "O campo tempoPreparo deve conter entre 3 e 50 caracteres")
 	private String tempoPreparo;
 
 	@JsonIgnore
