@@ -48,6 +48,11 @@ public class PaoService {
 		obj.setFornada(forn);
 		return repository.save(obj);
 	}
+
+	public void delete(Integer id) {
+		Pao obj = findById(id);
+		repository.delete(obj);
+	}
 	
 	
 
