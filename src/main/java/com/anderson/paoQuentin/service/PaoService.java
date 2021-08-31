@@ -29,6 +29,17 @@ public class PaoService {
 		fornadaService.findById(id_for);
 		return repository.findAllByFornada(id_for);
 	}
+
+	public Pao update(Integer id, Pao obj) {
+		Pao newObj = findById(id);
+		updateData(newObj, obj);
+		return repository.save(newObj);
+	}
+
+	private void updateData(Pao newObj, Pao obj) {
+		newObj.setNome(obj.getNome());
+		newObj.setTempoPreparo(obj.getTempoPreparo());
+	}
 	
 	
 
