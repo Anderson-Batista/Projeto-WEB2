@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.anderson.paoQuentin.domain.Fornada;
 import com.anderson.paoQuentin.domain.Pao;
 import com.anderson.paoQuentin.repositories.PaoRepository;
 import com.anderson.paoQuentin.service.exceptions.ObjectNotFoundException;
@@ -39,6 +40,13 @@ public class PaoService {
 	private void updateData(Pao newObj, Pao obj) {
 		newObj.setNome(obj.getNome());
 		newObj.setTempoPreparo(obj.getTempoPreparo());
+	}
+
+	public Pao create(Integer id_for, Pao obj) {
+		obj.setId(null);
+		Fornada forn = fornadaService.findById(id_for);
+		obj.setFornada(forn);
+		return repository.save(obj);
 	}
 	
 	
